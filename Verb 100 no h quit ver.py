@@ -1,3 +1,6 @@
+import streamlit as st
+
+# Your verb dictionary remains the same. It is the data for our app.
 verb_dictionary = {
     "be": ["was, were", "been"],
     "bear": ["bore", "born"],
@@ -93,32 +96,30 @@ verb_dictionary = {
     "understand": ["understood", "understood"],
     "undertake": ["undertook", "undertaken"],
     "underwrite": ["underwrote", "underwritten"],
-    
 }
 
-# The program will now run in a continuous loop until you manually stop it.
-print("Welcome to the Irregular Verb Dictionary!")
-print("Type an irregular verb to see its other forms.")
-print("The program will continue to run, allowing you to enter new words.")
 
-# Start a loop that runs continuously
-while True:
-    # Get user input and normalize it
-    user_input = input("\nEnter a verb: ").strip().lower()
+# --- START of Streamlit UI Code ---
 
-    # Check if the user's input exists as a key in our dictionary
+# Add a title to the page using st.title
+st.title("Irregular Verb Dictionary")
+# Add an introductory message using st.write
+st.write("Type an irregular verb to see its other forms. The results will appear as you type.")
+
+# Use st.text_input to get user input from the web interface
+user_input = st.text_input("Enter a verb: ").strip().lower()
+
+# The rest of the logic is similar, but we'll use st.write to display the results.
+if user_input:  # Check if the user has entered anything
     if user_input in verb_dictionary:
-        # Get the verb forms from the dictionary
         verb_forms = verb_dictionary[user_input]
-        verb2 = verb_forms[0] # Past tense
-        verb3 = verb_forms[1] # Past participle
-       
-        # Display the results
-        print(f"Verb 1: {user_input}")
-        print(f"Verb 2: {verb2}")
-        print(f"Verb 3: {verb3}")
-       
+        verb2 = verb_forms[0]
+        verb3 = verb_forms[1]
+        
+        # Use st.write or st.markdown to display the output
+        st.write(f"**Verb 1:** {user_input}")
+        st.write(f"**Verb 2:** {verb2}")
+        st.write(f"**Verb 3:** {verb3}")
     else:
-        # If the word is not in the dictionary, inform the user
-        print(f"Sorry, I couldn't find '{user_input}' in the dictionary.")
-        print("Please try a different word.")
+        st.write(f"Sorry, I couldn't find '{user_input}' in the dictionary.")
+        st.write("Please try a different word.")
